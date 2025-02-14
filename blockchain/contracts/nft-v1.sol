@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
 
-contract AlbumNFTV1 is ERC1155URIStorage, Ownable, IERC2981 {
+contract NFTV1 is ERC1155URIStorage, Ownable, IERC2981 {
 	uint256 public nextTokenId;
 	mapping(uint256 => address) public creators;
 	mapping(uint256 => uint256) public totalSupply;

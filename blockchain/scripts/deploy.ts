@@ -22,7 +22,7 @@ async function main(networkType: string) {
 
   console.log("Deploying contract...");
 
-  const NFTContract = await ethers.getContractFactory("AlbumNFTV1");
+  const NFTContract = await ethers.getContractFactory("NFTV1");
   const contract = await NFTContract.deploy(baseURI, platformAddress);
 
   await contract.waitForDeployment();
