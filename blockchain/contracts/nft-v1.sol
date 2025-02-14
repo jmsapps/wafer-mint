@@ -10,7 +10,7 @@ contract NFTV1 is ERC1155URIStorage, Ownable, IERC2981 {
 	uint256 public nextTokenId;
 	mapping(uint256 => address) public creators;
 	mapping(uint256 => uint256) public totalSupply;
-	uint256 public constant ROYALTY_PERCENTAGE = 2;
+	uint256 public constant ROYALTY_PERCENTAGE = 10;
 	address public platformAddress;
 
 	event NFTMinted(address indexed creator, uint256 tokenId, uint256 amount, string tokenURI);
@@ -33,9 +33,9 @@ contract NFTV1 is ERC1155URIStorage, Ownable, IERC2981 {
 		emit NFTMinted(msg.sender, tokenId, amount, metadataURI);
 	}
 
-	function royaltyInfo(uint256 /* tokenId */, uint256 salePrice) external view override returns (address receiver, uint256 royaltyAmount) {
-		uint256 totalRoyalty = (salePrice * ROYALTY_PERCENTAGE) / 100; // 2% of sale price
+	function royaltyInfo(uint256 tokenId, uint256 salePrice) external view override returns (address receiver, uint256 royaltyAmount) {
+		uint256 totalRoyalty = (salePrice * ROYALTY_PERCENTAGE) / 100;
 
-		return (platformAddress, totalRoyalty);
+		return (creators[tokenId], totalRoyalty);
 	}
 }
